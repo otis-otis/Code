@@ -1,0 +1,124 @@
+{
+  "id": "PhquVwEaetRTGuYRIoE6",
+  "created": 1689402325,
+  "scenes": [
+    {
+      "time": "DAY",
+      "title": " LIVING ROOM",
+      "setting": "INT",
+      "blocks": [
+        {
+          "type": "Action",
+          "content": "A PET PARENT is sitting on her couch with her laptop. Her DOG is seated next to her, also looking at her computer. We see the parent is at PetMeds.com, entering her dog's name and vet information."
+        },
+        {
+          "type": "Action",
+          "content": "Then she picks up her phone and makes a call. We hear the friendly voice of a CUSTOMER SERVICE REP on the other end:"
+        },
+        {
+          "type": "Dialog",
+          "character": "REP (V.O.)",
+          "content": "Thanks for calling PetMeds! How can I help you today?"
+        },
+        {
+          "type": "Dialog",
+          "character": "PARENT",
+          "content": "I'm placing an order for my dog, Jojo, and wanted to make sure I'm getting the right thing. He's got himself a little <span class=\"italic\">flea</span> situation."
+        },
+        {
+          "type": "Dialog",
+          "character": "REP (V.O.)",
+          "content": "Oh boy. That's no fun. Up all night scratching?"
+        },
+        {
+          "type": "Dialog",
+          "character": "PARENT",
+          "content": "Yeah."
+        }
+      ]
+    },
+    {
+      "time": "DAY",
+      "title": " PETMEDS HQ",
+      "setting": "INT",
+      "blocks": [
+        {
+          "type": "Action",
+          "content": "We cut to the PetMeds call center, shot from behind the customer service rep. We can only see his headset and computer screen."
+        },
+        {
+          "type": "Dialog",
+          "character": "REP",
+          "content": "Feels like there's a tiny circus up in there?"
+        },
+        {
+          "type": "Dialog",
+          "character": "PARENT (V.O.)",
+          "content": "Uh huh."
+        },
+        {
+          "type": "Action",
+          "content": "Now we reveal that the rep is actually a TALKING DOG. He's sitting at his little desk, wearing a little headset."
+        },
+        {
+          "type": "Dialog",
+          "character": "REP",
+          "content": "I feel you, dog."
+        }
+      ]
+    },
+    {
+      "time": "DAY",
+      "title": " LIVING ROOM",
+      "setting": "INT",
+      "blocks": [
+        {
+          "type": "Action",
+          "content": "Back to the parent, looking a little confused."
+        },
+        {
+          "type": "Dialog",
+          "character": "REP (V.O.)",
+          "content": "But don't worry, we'll contact your vet and send Jojo his medication ASAP. He'll be feeling better in no time, take it from me."
+        },
+        {
+          "type": "Dialog",
+          "character": "PARENT",
+          "parenthetical": "(relieved)",
+          "content": "Amazing. You seem to really <span class=\"italic\">get</span> dogs."
+        }
+      ]
+    },
+    {
+      "time": "DAY",
+      "title": " PETMEDS HQ",
+      "setting": "INT",
+      "blocks": [
+        {
+          "type": "Action",
+          "content": "We return to the call center, where the rep is finalizing the parent's order on his computer."
+        },
+        {
+          "type": "Dialog",
+          "character": "REP",
+          "parenthetical": "(looking around at all the PET REPS)",
+          "content": "What can I say? We're pet people."
+        },
+        {
+          "type": "Action",
+          "content": "We close on the PetMeds END CARD."
+        },
+        {
+          "type": "Dialog",
+          "character": "NARRATOR (V.O.)",
+          "content": "PetMeds. Your trusted pet health expert. Visit us at PedMeds.com."
+        },
+        {
+          "type": "Dialog",
+          "character": "NARRATOR (V.O.) (ALT)",
+          "content": "PetMeds. We feel you, dog. Visit us at PedMeds.com."
+        }
+      ]
+    }
+  ]
+}
