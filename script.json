@@ -1,0 +1,50 @@
+[
+  {
+    "id": "A",
+    "type": "Action",
+    "content": "Jerry walks in the door, and notices the cereal boxes are out of order"
+  },
+  {
+    "id": "B",
+    "type": "Action",
+    "content": "Kramer busts through the door holding a cereal spoon"
+  },
+  {
+    "id": "C",
+    "type": "Dialog",
+    "character": "Jerry",
+    "content": "Kramer, have you been eating my cereal?"
+  },
+  {
+    "id": "D",
+    "type": "Dialog",
+    "character": "Kramer",
+    "parenthetical": "(Confused)",
+    "content": "I thought we had an agreement..."
+  },
+  {
+    "id": "E",
+    "type": "Dialog",
+    "character": "Jerry",
+    "parenthetical": "(Visibly frustrated)",
+    "content": "No agreement."
+  },
+  {
+    "id": "F",
+    "type": "Dialog",
+    "character": "Kramer",
+    "content": "No agreement?"
+  },
+  {
+    "id": "E",
+    "type": "Dialog",
+    "character": "Jerry",
+    "parenthetical": "(Loudly)",
+    "content": "NO AGREEMENT."
+  },
+  {
+    "id": "E",
+    "type": "Action",
+    "content": "Kramer scoffs"
+  }
+]
