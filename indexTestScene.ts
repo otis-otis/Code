@@ -44,7 +44,6 @@ scenesArray.forEach((scene) => {
   // Access the "blocks" array and iterate through each block
   const blocksArray = scene.blocks;
   blocksArray.forEach((block) => {
-    // Access properties of each block here
     // console.log("Type:", block.type);
     // console.log("Content:", block.content);
     const queryString = JSON.stringify(block.content);
@@ -67,7 +66,7 @@ scenesArray.forEach((scene) => {
 
       // DOING VECTOR STORAGE
       const vectorStore = await HNSWLib.fromTexts(
-        json.scenes.map((scene: any) => JSON.stringify(scene)), // Stringify each scene object
+        json.scenes.map((scene: any) => JSON.stringify(blocksArray)), // Stringify each scene object
         [],
         new OpenAIEmbeddings()
       );
@@ -75,7 +74,7 @@ scenesArray.forEach((scene) => {
       // GETTING RESULTS FROM VECTOR STORAGE
       const results = await vectorStore.similaritySearchWithScore(
         JSON.stringify(queryString),
-        2
+        1
         // {sceneId: True}
       );
 

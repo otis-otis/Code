@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -40,98 +51,70 @@ require("dotenv/config");
 var fs = require("fs");
 var openai_1 = require("langchain/embeddings/openai");
 var hnswlib_1 = require("langchain/vectorstores/hnswlib");
+// const QUERY = {
+//   type: "Dialogue",
+//   content: 'Amazing. You seem to really <span class="italic">get</span> dogs.',
+// };
 // Read the .json file
 var queryData = fs.readFileSync("scripts/V8.json", "utf8");
+// const queryObjects = JSON.parse(queryData);
+// const queryObjects: { scene: { name: string; description: string }[] } =
+//   JSON.parse(queryData);
 var parsedData = JSON.parse(queryData);
 var scenesArray = parsedData.scenes;
-function run() {
-    return __awaiter(this, void 0, void 0, function () {
-        var script, json, vectorStore;
-        var _this = this;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    script = fs.readFileSync("scripts/V1.json", {
-                        encoding: "utf-8",
-                    });
-                    json = JSON.parse(script);
-                    return [4 /*yield*/, hnswlib_1.HNSWLib.fromTexts(json.scenes.map(function (scene) { return JSON.stringify(scene); }), // Stringify each scene object
-                        [], new openai_1.OpenAIEmbeddings())];
-                case 1:
-                    vectorStore = _a.sent();
-                    // Iterate through each query object and process them
-                    return [4 /*yield*/, Promise.all(scenesArray.map(function (scene) { return __awaiter(_this, void 0, void 0, function () {
-                            var blocksArray;
-                            var _this = this;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        // Access properties of each scene here
-                                        console.log("Time:", scene.time);
-                                        console.log("Title:", scene.title);
-                                        console.log("Setting:", scene.setting);
-                                        blocksArray = scene.blocks;
-                                        return [4 /*yield*/, Promise.all(blocksArray.map(function (block) { return __awaiter(_this, void 0, void 0, function () {
-                                                var queryString, results;
-                                                return __generator(this, function (_a) {
-                                                    switch (_a.label) {
-                                                        case 0:
-                                                            queryString = JSON.stringify(block.content);
-                                                            return [4 /*yield*/, vectorStore.similaritySearchWithScore(JSON.stringify(queryString), 2
-                                                                // {sceneId: True}
-                                                                )];
-                                                        case 1:
-                                                            results = _a.sent();
-                                                            console.log("Results:", results); // Replace this with the actual processing of results
-                                                            return [2 /*return*/];
-                                                    }
-                                                });
-                                            }); }))];
-                                    case 1:
-                                        _a.sent();
-                                        return [2 /*return*/];
-                                }
+// const scenes = queryObjects.scenes;
+// const blocks = scenes.blocks;
+// Scenes.forEach (scenes)
+// Scenes.forEach (scenes.blocks)
+// Do an output file that (score) "Old Text" => "New Text" (score) ...
+// Cap scores at .000
+// Iterate through each query object and process them
+scenesArray.forEach(function (scene) {
+    // Access properties of each scene here
+    console.log("Time:", scene.time);
+    console.log("Title:", scene.title);
+    console.log("Setting:", scene.setting);
+    // Access the "blocks" array and iterate through each block
+    var blocksArray = scene.blocks;
+    blocksArray.forEach(function (block) {
+        // Access properties of each block here
+        // console.log("Type:", block.type);
+        // console.log("Content:", block.content);
+        var queryString = JSON.stringify(block.content);
+        // OPENING THE OLD SCRIPT
+        function run() {
+            return __awaiter(this, void 0, void 0, function () {
+                var script, json, vectorStore, results;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            script = fs.readFileSync("scripts/V1.json", {
+                                encoding: "utf-8",
                             });
-                        }); }))];
-                case 2:
-                    // Iterate through each query object and process them
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
+                            json = JSON.parse(script);
+                            return [4 /*yield*/, hnswlib_1.HNSWLib.fromTexts(json.scenes.map(function (scene) { return JSON.stringify(scene); }), // Stringify each scene object
+                                [], new openai_1.OpenAIEmbeddings())];
+                        case 1:
+                            vectorStore = _a.sent();
+                            return [4 /*yield*/, vectorStore.similaritySearchWithScore(JSON.stringify(queryString), 1
+                                // {sceneId: True}
+                                )];
+                        case 2:
+                            results = _a.sent();
+                            console.log("INPUT");
+                            console.log(queryString);
+                            console.log("");
+                            console.log("RESULTS");
+                            results.forEach(function (_a) {
+                                var doc = _a[0], score = _a[1];
+                                console.log(__assign({ score: score }, JSON.parse(doc.pageContent)));
+                                console.log("");
+                            });
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        }
+        run();
     });
-}
-run();
-//   scenes.forEach((block) => {
-//     // Convert query object to string
-//     const queryString = JSON.stringify(rest);
-//     // OLD SCRIPT
-//     async function run() {
-//       const script = fs.readFileSync(`scripts/V1.json`, {
-//         encoding: "utf-8",
-//       });
-//       const json = JSON.parse(script);
-//       // DOING VECTOR STORAGE
-//       const vectorStore = await HNSWLib.fromTexts(
-//         json.map((block: any) => JSON.stringify(block)),
-//         [],
-//         new OpenAIEmbeddings()
-//       );
-//       // GETTING RESULTS FROM VECTOR STORAGE
-//       const results = await vectorStore.similaritySearchWithScore(
-//         JSON.stringify(queryString),
-//         2
-//         // {sceneId: True}
-//       );
-//       console.log("INPUT");
-//       console.log(queryString);
-//       console.log("");
-//       console.log("RESULTS");
-//       results.forEach(([doc, score]) => {
-//         console.log({ score, ...JSON.parse(doc.pageContent) });
-//         console.log("");
-//       });
-//     }
-//     run();
-//   });
-// });
+});
