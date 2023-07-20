@@ -54,23 +54,23 @@ scenesArray.forEach((scene) => {
       const script = fs.readFileSync(`scripts/V1.json`, {
         encoding: "utf-8",
       });
-    
-    // PARSING THE OLD SCRIPT
-    const json: {
-      scenes: {
-        time: string;
-        title: string;
-        setting: string;
-        blocks: { type: string; content: string }[];
-      }[];
-    } = JSON.parse(script);
 
-    // DOING VECTOR STORAGE
-    const vectorStore = await HNSWLib.fromTexts(
-      json.scenes.map((scene: any) => JSON.stringify(scene)), // Stringify each scene object
-      [],
-      new OpenAIEmbeddings()
-    );
+      // PARSING THE OLD SCRIPT
+      const json: {
+        scenes: {
+          time: string;
+          title: string;
+          setting: string;
+          blocks: { type: string; content: string }[];
+        }[];
+      } = JSON.parse(script);
+
+      // DOING VECTOR STORAGE
+      const vectorStore = await HNSWLib.fromTexts(
+        json.scenes.map((scene: any) => JSON.stringify(scene)), // Stringify each scene object
+        [],
+        new OpenAIEmbeddings()
+      );
 
       // GETTING RESULTS FROM VECTOR STORAGE
       const results = await vectorStore.similaritySearchWithScore(
@@ -78,6 +78,16 @@ scenesArray.forEach((scene) => {
         2
         // {sceneId: True}
       );
-  };
+
+      console.log("INPUT");
+      console.log(queryString);
+      console.log("");
+      console.log("RESULTS");
+      results.forEach(([doc, score]) => {
+        console.log({ score, ...JSON.parse(doc.pageContent) });
+        console.log("");
+      });
+    }
+    run();
+  });
 });
-// new
